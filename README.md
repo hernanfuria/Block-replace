@@ -1,37 +1,41 @@
 # NAP Replace Script
 
-Script en Python para automatizar el reemplazo o inserción de bloques DXF utilizando la librería `ezdxf`.
+Python script to automate the replacement or insertion of DXF blocks using the `ezdxf` library.
 
-## ¿Qué hace?
-El script lee un archivo DXF de entrada (`to_replace.dxf`), recorre todas las entidades de inserción de bloques (`INSERT`) presentes en el espacio modelo (`modelspace`), y añade un nuevo bloque especificado (`new_block_name`) en las mismas coordenadas `(x, y, z)` de cada bloque existente. 
+## What it does
+The script reads an input DXF file from the `IN` directory (`IN/to_replace.dxf`), iterates through all block insertion entities (`INSERT`) present in the modelspace, and adds a specified new block (`new_block_name`) at the exact same `(x, y, z)` coordinates of each existing block. 
 
-Opcionalmente, permite eliminar los bloques originales (`delete_old_blocks = True`) y guarda el resultado en un nuevo archivo DXF (`replaced.dxf`).
+Optionally, it allows deleting the original blocks (`delete_old_blocks = True`) and saves the result as a new DXF file in the `OUT` directory (`OUT/replaced.dxf`).
 
-## Dependencias
-Este script requiere Python y la librería `ezdxf` para manipular archivos DXF.
+## Dependencies
+This script requires Python and the `ezdxf` library to manipulate DXF files.
 
-Puedes instalar la dependencia ejecutando:
+You can install the dependency by running:
 ```bash
 pip install ezdxf
 ```
 
-## Configuración
-Dentro del archivo `nap_replace.py` se pueden modificar los siguientes parámetros en la sección de configuración:
+## Configuration & Folders
+The script automatically checks for and creates `IN` and `OUT` directories in the script's root folder if they do not exist.
 
-- `input_file`: Ruta del archivo DXF de entrada (por defecto: `"to_replace.dxf"`).
-- `output_file`: Ruta del archivo DXF de salida (por defecto: `"replaced.dxf"`).
-- `new_block_name`: Nombre del nuevo bloque que se va a insertar (por defecto: `"nap_placeholder"`).
-- `new_layer_name`: Capa (layer) donde se insertará el nuevo bloque (por defecto: `"0"`).
-- `delete_old_blocks`: Booleano (`True` o `False`). Si es `True`, elimina los bloques originales después de insertar los nuevos.
+Within `block_replace.py`, you can modify the following configuration parameters:
+- `input_directory`: Directory for input DXF files (default: `"IN"`).
+- `output_directory`: Directory for output DXF files (default: `"OUT"`).
+- `input_file`: Path of the input DXF file (default: `os.path.join("IN", "to_replace.dxf")`).
+- `output_file`: Path of the output DXF file (default: `os.path.join("OUT", "replaced.dxf")`).
+- `new_block_name`: Name of the new block to insert (default: `"nap_placeholder"`).
+- `new_layer_name`: Layer where the new block will be inserted (default: `"0"`).
+- `delete_old_blocks`: Boolean (`True` or `False`). If `True`, deletes original blocks after inserting new ones.
 
-## Cómo ejecutarlo
-Asegúrate de tener instalada la dependencia `ezdxf` y ejecuta el script con:
+## How to Run
+Ensure you have installed the `ezdxf` dependency, place your input DXF inside the `IN` folder, and run the script with:
 
 ```bash
-py nap_replace.py
+python block_replace.py
 ```
-*(O el comando equivalente según tu entorno de Python, como `python nap_replace.py`)*
+*(Or the equivalent command for your Python environment, such as `py block_replace.py`)*
 
-## Información relevante
-- Realiza una validación inicial ("sanity check") para garantizar que el nuevo bloque (`new_block_name`) existe en las definiciones de bloques del dibujo antes de procesar las inserciones.
-- Al finalizar, imprime en consola la cantidad total de bloques procesados/reemplazados.
+## Relevant Information
+- Automatically creates `IN` and `OUT` directories if they are missing.
+- Performs an initial sanity check to ensure the new block (`new_block_name`) exists in the drawing's block definitions before processing insertions.
+- Upon completion, prints the total count of processed/replaced blocks to the console.
