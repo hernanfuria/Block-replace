@@ -4,4 +4,5 @@
 # Allow specific files
 !README.md
 !block_replace.py
+!run.bat
 !.gitignore

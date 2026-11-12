@@ -30,11 +30,12 @@ Within `block_replace.py`, you can modify:
 
 ## How to Run
 1. Place one or more DXF files into the `IN` folder.
-2. Execute the script with:
-
-```bash
-python block_replace.py
-```
-*(Or the equivalent command for your Python environment, such as `py block_replace.py`)*
+2. Execute the script either by double-clicking `run.bat` or running in your terminal:
+   - Using the batch script: double-click `run.bat`
+   - Using Python directly:
+     ```bash
+     python block_replace.py
+     ```
+     *(Or `py block_replace.py`)*
 
 3. Follow the interactive prompts in the console to select the replacement block for each file.
